@@ -9,6 +9,6 @@ sklearn==0.0
 streamlit==1.12.2
 tensorflow==2.10.0
 xgboost==1.6.2
-locales==0.0.2
+locale
 time==0.3.0
 
