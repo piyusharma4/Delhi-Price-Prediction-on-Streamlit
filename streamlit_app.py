@@ -1,12 +1,11 @@
 import streamlit as st
 import numpy as np
-import locale
+from babel.numbers import format_currency
 from sklearn.preprocessing import StandardScaler
 import pickle
 import pandas as pd
 import time
 
-locale.setlocale(locale.LC_MONETARY, 'en_IN')
 model= pickle.load(open('classifier.pkl','rb'))
 scaler= pickle.load(open('scaler.pkl','rb'))
 cols_when_model_builds = model.feature_names_
@@ -53,5 +52,5 @@ if btn:
 	pred = model.predict(inp_scaled)
 	time.sleep(5)
 	st.write('Calculating the prediction...')
-	st.write('The Predicted Price for this Property is : ₹ {} '.format(locale.currency(int(pred[0]), grouping=True)))
+	st.write('The Predicted Price for this Property is : ₹ {} '.format(format_currency(int(pred[0]), 'INR', locale='en_IN')))
 	print(input_data)
