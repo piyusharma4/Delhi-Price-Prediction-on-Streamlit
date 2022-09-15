@@ -1,11 +1,12 @@
 import streamlit as st
 import numpy as np
-#from tensorflow import keras
-#from keras.models import load_model
+import locale
 from sklearn.preprocessing import StandardScaler
 import pickle
 import pandas as pd
+import time
 
+locale.setlocale(locale.LC_MONETARY, 'en_IN')
 model= pickle.load(open('classifier.pkl','rb'))
 scaler= pickle.load(open('scaler.pkl','rb'))
 cols_when_model_builds = model.feature_names_
@@ -50,5 +51,7 @@ inp=pd.DataFrame([input_data],columns=cols_when_model_builds)
 inp_scaled=scaler.transform(inp)
 if btn:
 	pred = model.predict(inp_scaled)
-	st.write('The Predicted Price for this Property is : {} '.format(int(pred[0])))
+	time.sleep(5)
+	st.write('Calculating the prediction...')
+	st.write('The Predicted Price for this Property is : ₹ {} '.format(locale.currency(int(pred[0]), grouping=True)))
 	print(input_data)
