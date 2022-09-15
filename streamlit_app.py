@@ -1,14 +1,14 @@
 import streamlit as st
 import numpy as np
-from tensorflow import keras
-from keras.models import load_model
+#from tensorflow import keras
+#from keras.models import load_model
 from sklearn.preprocessing import StandardScaler
 import pickle
 import pandas as pd
 
 model= pickle.load(open('classifier.pkl','rb'))
 scaler= pickle.load(open('scaler.pkl','rb'))
-cols_when_model_builds = model.get_booster().feature_names
+cols_when_model_builds = model.feature_names_
 st.title("Welcome to Delhi House Price Prediction app")
 
 Area = float(st.number_input("Area of the Property in square feet"))
